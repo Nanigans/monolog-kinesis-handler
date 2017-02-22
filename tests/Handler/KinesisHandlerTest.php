@@ -19,7 +19,7 @@ class KinesisHandlerTest extends \PHPUnit_Framework_TestCase
     {
         $this->kinesisClient = $this
             ->getMockBuilder('Aws\Kinesis\KinesisClient')
-            ->setMethods(['putRecord', 'putRecords'])
+            ->setMethods(array('putRecord', 'putRecords'))
             ->disableOriginalConstructor()
             ->getMock();
         $this->formatter = $this->getMock('CascadeEnergy\Monolog\Formatter\KinesisFormatter');
@@ -40,7 +40,7 @@ class KinesisHandlerTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('putRecord');
 
-        $this->handler->handle(['foo' => 'bar', 'level' => 1000, 'channel' => 'channelName']);
+        $this->handler->handle(array('foo' => 'bar', 'level' => 1000, 'channel' => 'channelName'));
     }
 
     public function testHandleBatchShouldSendASetOfRecords()
@@ -49,9 +49,9 @@ class KinesisHandlerTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('putRecords');
 
-        $this->handler->handleBatch([
-            ['foo' => 'bar', 'level' => 1000, 'channel' => 'channelName'],
-            ['baz' => 'qux', 'level' => 1000, 'channel' => 'channelName']
-        ]);
+        $this->handler->handleBatch(array(
+            array('foo' => 'bar', 'level' => 1000, 'channel' => 'channelName'),
+            array('baz' => 'qux', 'level' => 1000, 'channel' => 'channelName')
+        ));
     }
 }

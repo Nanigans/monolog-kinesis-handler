@@ -16,35 +16,35 @@ class KinesisFormatterTest extends \PHPUnit_Framework_TestCase
 
     public function testItShouldFormatASingleRecordAsParametersForAKinesisPutRecordCall()
     {
-        $record = ['foo' => 'bar', 'channel' => 'channelName'];
+        $record = array('foo' => 'bar', 'channel' => 'channelName');
 
         $result = $this->formatter->format($record);
 
         $this->assertEquals(
-            [
+            array(
                 'Data' => json_encode($record),
                 'PartitionKey' => 'channelName'
-            ],
+            ),
             $result
         );
     }
 
     public function testItShouldFormatABatchOfRecordsAsParametersForPutRecords()
     {
-        $recordList = [
-            ['foo' => 'bar', 'channel' => 'channelNameFoo'],
-            ['baz' => 'qux', 'channel' => 'channelNameBaz'],
-        ];
+        $recordList = array(
+            array('foo' => 'bar', 'channel' => 'channelNameFoo'),
+            array('baz' => 'qux', 'channel' => 'channelNameBaz'),
+        );
 
         $result = $this->formatter->formatBatch($recordList);
 
         $this->assertEquals(
-            [
-                'Records' => [
-                    ['Data' => json_encode($recordList[0]), 'PartitionKey' => 'channelNameFoo'],
-                    ['Data' => json_encode($recordList[1]), 'PartitionKey' => 'channelNameBaz'],
-                ]
-            ],
+            array(
+                'Records' => array(
+                    array('Data' => json_encode($recordList[0]), 'PartitionKey' => 'channelNameFoo'),
+                    array('Data' => json_encode($recordList[1]), 'PartitionKey' => 'channelNameBaz'),
+                )
+            ),
             $result
         );
     }

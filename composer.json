@@ -19,11 +19,18 @@
       "CascadeEnergy\\Tests\\Monolog\\": "tests"
     }
   },
+  "repositories": [
+    {
+      "url": "https://github.com/Nanigans/monolog.git",
+      "type": "git"
+    }
+  ],
   "require": {
-    "aws/aws-sdk-php": "^3.2",
-    "monolog/monolog": "^1.16"
+    "php": ">=5.3.3",
+    "aws/aws-sdk-php": "2.8",
+    "nanigans/monolog": "^1.16"
   },
   "require-dev": {
-    "phpunit/phpunit": "^4.8"
+    "phpunit/phpunit": "~4.8"
   }
 }

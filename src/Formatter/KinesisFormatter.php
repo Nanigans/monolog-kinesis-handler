@@ -20,10 +20,10 @@ class KinesisFormatter implements FormatterInterface
      */
     public function format(array $record)
     {
-        return [
+        return array(
             'Data' => json_encode($record),
             'PartitionKey' => $record['channel']
-        ];
+        );
     }
 
     /**
@@ -35,12 +35,12 @@ class KinesisFormatter implements FormatterInterface
      */
     public function formatBatch(array $records)
     {
-        $kinesisRecords = [];
+        $kinesisRecords = array();
 
         foreach ($records as $record) {
             $kinesisRecords[] = $this->format($record);
         }
 
-        return ['Records' => $kinesisRecords];
+        return array('Records' => $kinesisRecords);
     }
 }
